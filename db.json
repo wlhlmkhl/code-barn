@@ -1,0 +1,16 @@
+{
+  "snippets": [
+    {
+      "id": "8462c105-6890-4db3-be88-d6d65ec7d756",
+      "savedAt": 1747056228452,
+      "title": "mockkock.js",
+      "code": "export const mockkock = () => {\r\n  return <div>mockkock</div>;\r\n};\r\n"
+    },
+    {
+      "id": "c0a04afa-84d0-4720-a07f-fb86969165c4",
+      "savedAt": 1747056228453,
+      "title": "superButton.css",
+      "code": ".button {\r\n  background-color: #3b82f6; /* bg-blue-500 */\r\n  color: #ffffff; /* text-white */\r\n  font-weight: bold; /* font-bold */\r\n  padding: 0.5rem 1rem; /* py-2 px-4 */\r\n  border-radius: 0.25rem; /* rounded */\r\n  transition: background-color 0.2s; /* for hover effect */\r\n}\r\n\r\n.button:hover {\r\n  background-color: #1d4ed8; /* hover:bg-blue-700 */\r\n}\r\n"
+    }
+  ]
+}
