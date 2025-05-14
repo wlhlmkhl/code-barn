@@ -1,6 +1,8 @@
 import path from "path";
-import { getPosts } from "../utils/utils.mjs";
+import { getPosts, getPostById } from "../utils/utils.mjs";
 import fs from "fs";
+
+const folderPath = path.join(process.cwd(), "codebarn", "Out");
 
 function createFile(folder, fileName, content) {
   const targetPath = path.join(folder, fileName);
@@ -11,12 +13,15 @@ function createFile(folder, fileName, content) {
   }
 }
 
-export default function fetchAll() {
+export function fetchAll() {
   const data = getPosts();
   if (!data || data.length === 0) {
     console.log("CodeBarn is empty.");
   }
-  const folderPath = path.join(process.cwd(), "codebarn", "Out");
-  console.log(folderPath);
   data.forEach((item) => createFile(folderPath, item.title, item.code));
+}
+
+export function fetchById(id) {
+  const file = getPostById(id);
+  createFile(folderPath, file.title, file.code);
 }

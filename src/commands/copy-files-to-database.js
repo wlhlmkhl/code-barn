@@ -32,7 +32,7 @@ function deleteFile(filePath) {
   }
 }
 
-export default async function copyFileToDataBase() {
+export default async function copyFiles() {
   const targetPath = path.join(process.cwd(), "codebarn", "In");
   const fileNames = readFolderContent(targetPath);
   fileNames.forEach((fileName) => {

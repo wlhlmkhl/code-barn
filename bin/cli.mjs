@@ -2,10 +2,10 @@
 import { Command } from "commander";
 
 import createFolder from "../src/commands/create-folder.js";
-import copyFileToDataBase from "../src/commands/copy-files-to-database.js";
+import copyFiles from "../src/commands/copy-files-to-database.js";
 import showList from "../src/commands/show-codebarn-list.js";
-import { clearAllPosts } from "../src/utils/utils.mjs";
-import fetchAll from "../src/commands/fetch-all.js";
+import { fetchAll, fetchById } from "../src/commands/fetch.js";
+import { deleteAll, deleteById } from "../src/commands/delete.mjs";
 
 const program = new Command();
 
@@ -15,27 +15,41 @@ program
   .version("1.0.0");
 
 program
-  .command("create folder")
+  .command("create barn")
   .description("create a folder in root folder")
   .action(createFolder);
 program
   .command("copy")
-  .description("copy every file in in folder to databas")
-  .action(copyFileToDataBase);
+  .description("copy every file in in folder to database")
+  .action(copyFiles);
 
 program
-  .command("show list")
+  .command("show barn")
   .description("Show a list of the everything stored in the codebarn")
   .action(showList);
 
 program
-  .command("clear all")
-  .description("Delete/clear all snippets in the database")
-  .action(clearAllPosts);
+  .command("delete")
+  .description("Delete every snippet or by UUID")
+  .argument("<target>", "all")
+  .action((target) => {
+    if (target === "all") {
+      deleteAll();
+    } else {
+      deleteById(target);
+    }
+  });
 
 program
-  .command("fetch all")
-  .description("EXport every Items to Out folder")
-  .action(fetchAll);
+  .command("fetch")
+  .description("Export every Snippet or by UUID")
+  .argument("<target>", "all")
+  .action((target) => {
+    if (target === "all") {
+      fetchAll();
+    } else {
+      fetchById(target);
+    }
+  });
 
 program.parse();
