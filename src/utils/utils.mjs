@@ -56,3 +56,12 @@ export function extractNumber(input) {
   const number = input.split("-")[0].trim(); // Dela strängen vid "-" och ta första delen
   return parseInt(number, 10); // Konvertera till ett heltal
 }
+
+export function createFile(folderPath, fileName, content) {
+  const filePath = path.join(folderPath, fileName);
+  try {
+    fs.writeFileSync(filePath, content);
+  } catch (error) {
+    console.error(`Failed to create file at "${targetPath}":`, error.message);
+  }
+}

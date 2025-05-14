@@ -11,7 +11,7 @@ const __dirname = path.dirname(__filename); // Mappens sökväg där denna fil l
 export default function createFolder() {
   // Namnet på mappar som ska skapas
   const mainfolder = "codebarn";
-  const subfolders = ["In", "Out"];
+  const subfolders = ["in", "out"];
 
   // Skapar en fullständig sökväg till mappen baserat på var användaren står i terminalen
   const targetPath = path.join(process.cwd(), mainfolder);
