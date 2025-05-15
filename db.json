@@ -5,6 +5,12 @@
       "savedAt": 1747056228452,
       "title": "mockkock.js",
       "code": "export const mockkock = () => {\r\n  return <div>mockkock</div>;\r\n};\r\n"
+    },
+    {
+      "id": "e16ab341-6ac9-4ab0-84c7-eda9572896e2",
+      "savedAt": 1747311995572,
+      "title": "button.js",
+      "code": "const button = () => {\r\n  return <div>button</div>;\r\n};\r\nexport default button;\r\n"
     }
   ]
 }

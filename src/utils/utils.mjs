@@ -1,5 +1,7 @@
 import crypto from "node:crypto";
 import db from "../lib/lowdb.js";
+import path from "node:path";
+import fs from "node:fs";
 
 export const addNewPost = async (title, content) => {
   try {
@@ -57,11 +59,14 @@ export function extractNumber(input) {
   return parseInt(number, 10); // Konvertera till ett heltal
 }
 
-export function createFile(folderPath, fileName, content) {
+export function createFile(folderPath, fileName, content, id) {
   const filePath = path.join(folderPath, fileName);
   try {
-    fs.writeFileSync(filePath, content);
+    const comment = `// ID: ${id}\n`;
+    const newContent = comment + content;
+
+    fs.writeFileSync(filePath, newContent);
   } catch (error) {
-    console.error(`Failed to create file at "${targetPath}":`, error.message);
+    console.error(`Failed to create file at "${folderPath}":`, error.message);
   }
 }

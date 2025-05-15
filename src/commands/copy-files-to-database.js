@@ -32,7 +32,7 @@ function deleteFile(filePath) {
   }
 }
 
-export default async function copyFiles() {
+export async function copyFiles() {
   const targetPath = path.join(process.cwd(), "codebarn", "In");
   const fileNames = readFolderContent(targetPath);
   fileNames.forEach((fileName) => {
@@ -41,4 +41,8 @@ export default async function copyFiles() {
     addNewPost(fileName, content);
     deleteFile(filePath);
   });
+}
+
+export function copyFileByPath(path) {
+  console.log(path);
 }
