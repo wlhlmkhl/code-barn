@@ -1,7 +1,7 @@
-import path from "path";
+import { OUT_FOLDER } from "../config/PATHS.mjs";
 import { getPosts, getPostById, createFile } from "../utils/utils.mjs";
 
-const folderPath = path.join(process.cwd(), "codebarn", "Out");
+const folderPath = OUT_FOLDER;
 
 export function fetchAll() {
   const data = getPosts();

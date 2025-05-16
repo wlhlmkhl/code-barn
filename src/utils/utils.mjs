@@ -1,7 +1,7 @@
 import crypto from "node:crypto";
-import db from "../lib/lowdb.js";
 import path from "node:path";
 import fs from "node:fs";
+import db from "../lib/lowdb.js";
 
 export const addNewPost = async (title, content) => {
   try {
@@ -68,5 +68,36 @@ export function createFile(folderPath, fileName, content, id) {
     fs.writeFileSync(filePath, newContent);
   } catch (error) {
     console.error(`Failed to create file at "${folderPath}":`, error.message);
+  }
+}
+
+export function readFileContent(filePath) {
+  try {
+    const content = fs.readFileSync(filePath, "utf-8");
+    return content;
+  } catch (error) {
+    console.error("Failed to read file:", error);
+    return null;
+  }
+}
+
+export function readFolderContent(folderPath) {
+  try {
+    const fileNames = fs.readdirSync(folderPath);
+    if (fileNames.length === 0) {
+      throw new Error("The directory is empty.");
+    }
+    return fileNames;
+  } catch (error) {
+    console.error("Failed to read directory:", error);
+    return [];
+  }
+}
+
+export function deleteFile(filePath) {
+  try {
+    fs.unlinkSync(filePath);
+  } catch (error) {
+    console.error("Failed to delete file:", error);
   }
 }

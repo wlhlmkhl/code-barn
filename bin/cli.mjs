@@ -2,10 +2,7 @@
 
 import { Command } from "commander";
 import createFolder from "../src/commands/create-folder.js";
-import {
-  copyFiles,
-  copyFileByPath,
-} from "../src/commands/copy-files-to-database.js";
+import { copyFiles } from "../src/commands/copy-files-to-database.js";
 import showList from "../src/commands/show-codebarn.js";
 import { fetchAll, fetchById } from "../src/commands/fetch.js";
 import { deleteAll, deleteById } from "../src/commands/delete.mjs";
@@ -38,17 +35,9 @@ program
   .description("create a folder in root folder")
   .action(createFolder);
 program
-  .command("copy [path]")
-  .description(
-    "copy every file in in folder to database or copy path and copy specify file."
-  )
-  .action((path) => {
-    if (path) {
-      copyFileByPath(path);
-    } else {
-      copyFiles();
-    }
-  });
+  .command("copy")
+  .description("copys and deletes evertything in the out folder.")
+  .action(copyFiles);
 
 program
   .command("list")
