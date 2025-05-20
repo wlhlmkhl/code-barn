@@ -1,52 +1,54 @@
 #!/usr/bin/env node
 
 import { Command } from "commander";
-import createFolder from "../src/commands/create-folder.js";
-import { copyFiles } from "../src/commands/copy-files-to-database.js";
-import showList from "../src/commands/show-codebarn.js";
-import { fetchAll, fetchById } from "../src/commands/fetch.js";
+import createFolder from "../src/commands/create-folder.mjs";
+import { copyFiles } from "../src/commands/copy-files-to-database.mjs";
+import showList from "../src/commands/show-codebarn.mjs";
+import { fetchAll, fetchById } from "../src/commands/fetch.mjs";
 import { deleteAll, deleteById } from "../src/commands/delete.mjs";
+import chalk from "chalk";
 
-// Global hantering av Ctrl+C och oväntade fel
+// Handle Ctrl+C (SIGINT) gracefully and unexpected errors globally
 process.on("SIGINT", () => {
-  console.log("\n👋 Avslutade med Ctrl+C");
+  console.log("\n" + chalk.yellow("👋 Exited with Ctrl+C"));
   process.exit(0);
 });
 
+// Handle unexpected errors globally
 process.on("uncaughtException", (error) => {
   if (error.name === "ExitPromptError") {
-    console.log("👋 Prompten avbröts med Ctrl+C");
+    console.log(chalk.yellow("👋 Prompt was cancelled with Ctrl+C"));
     process.exit(0);
   } else {
-    console.error("❌ Ett oväntat fel inträffade:", error);
+    console.error(chalk.red("❌ An unexpected error occurred:"), error);
     process.exit(1);
   }
 });
 
 const program = new Command();
 
-program
-  .name("codebarn")
-  .description("CLI-verktyg för att spara kod och komponenter")
-  .version("1.0.0");
+program.name("codebarn").description("CLI tool for saving code and components");
 
 program
   .command("create")
-  .description("create a folder in root folder")
+  .description("Create the main folders (codebarn, in, out) in the root folder")
   .action(createFolder);
+
 program
   .command("copy")
-  .description("copys and deletes evertything in the out folder.")
+  .description(
+    "Copy all files from the input folder to the database and delete them from the folder"
+  )
   .action(copyFiles);
 
 program
   .command("list")
-  .description("Show a list of the everything stored in the codebarn")
+  .description("Show a list of all snippets stored in the database")
   .action(showList);
 
 program
   .command("delete")
-  .description("Delete every snippet or by UUID")
+  .description("Delete all snippets or a specific snippet by UUID")
   .argument("<target>", "all")
   .action((target) => {
     if (target === "all") {
@@ -58,7 +60,9 @@ program
 
 program
   .command("fetch")
-  .description("Export every Snippet or by UUID")
+  .description(
+    "Export all snippets or a specific snippet by UUID to files in the output folder"
+  )
   .argument("<target>", "all")
   .action((target) => {
     if (target === "all") {

@@ -11,6 +11,18 @@
       "savedAt": 1747311995572,
       "title": "button.js",
       "code": "const button = () => {\r\n  return <div>button</div>;\r\n};\r\nexport default button;\r\n"
+    },
+    {
+      "id": "e772a2a3-c2ea-4531-90f6-824c1242a5cc",
+      "savedAt": 1747651913207,
+      "title": "button.css",
+      "code": "button {\r\n  color: blue;\r\n}\r\n"
+    },
+    {
+      "id": "0e31e148-2290-4e1a-93ed-aeef1ebc38f1",
+      "savedAt": 1747652634771,
+      "title": "ploppplopp.jsx",
+      "code": "const ploppplopp = () => {\r\n  return <div>ploppplopp</div>;\r\n};\r\nexport default ploppplopp;\r\n"
     }
   ]
 }

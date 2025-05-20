@@ -1,8 +1,9 @@
 import crypto from "node:crypto";
 import path from "node:path";
 import fs from "node:fs";
-import db from "../lib/lowdb.js";
+import db from "../lib/lowdb.mjs";
 
+// Adds a new snippet to the database with a unique ID, timestamp, title, and code.
 export const addNewPost = async (title, content) => {
   try {
     const snippets = db.data.snippets;
@@ -18,6 +19,7 @@ export const addNewPost = async (title, content) => {
   }
 };
 
+// Returns all snippets from the database.
 export const getPosts = () => {
   try {
     const snippets = db.data.snippets;
@@ -27,6 +29,8 @@ export const getPosts = () => {
     return [];
   }
 };
+
+// Finds and returns a snippet by its unique ID.
 export const getPostById = (id) => {
   try {
     const data = db.data.snippets.find((item) => item.id === id);
@@ -36,6 +40,7 @@ export const getPostById = (id) => {
   }
 };
 
+// Removes all snippets from the database.
 export const deleteAllPosts = async () => {
   try {
     db.data.snippets = [];
@@ -45,7 +50,8 @@ export const deleteAllPosts = async () => {
   }
 };
 
-export const deletePostByid = async (id) => {
+// Deletes a snippet from the database by its unique ID.
+export const deletePostById = async (id) => {
   try {
     db.data.snippets = db.data.snippets.filter((item) => item.id !== id);
     await db.write();
@@ -54,24 +60,26 @@ export const deletePostByid = async (id) => {
   }
 };
 
-export function extractNumber(input) {
-  const number = input.split("-")[0].trim(); // Dela strängen vid "-" och ta första delen
-  return parseInt(number, 10); // Konvertera till ett heltal
-}
+// Extracts and returns the number at the start of a string, before the first hyphen.
+export const extractNumber = (input) => {
+  const number = input.split("-")[0].trim();
+  return parseInt(number, 10);
+};
 
-export function createFile(folderPath, fileName, content, id) {
+// Creates a new file in the specified folder, prepending the content with a comment containing the snippet ID and an 'r'.
+export const createFile = (folderPath, fileName, content, id) => {
   const filePath = path.join(folderPath, fileName);
   try {
-    const comment = `// ID: ${id}\n`;
+    const comment = `r\n// ID: ${id}\n`;
     const newContent = comment + content;
-
     fs.writeFileSync(filePath, newContent);
   } catch (error) {
     console.error(`Failed to create file at "${folderPath}":`, error.message);
   }
-}
+};
 
-export function readFileContent(filePath) {
+// Reads and returns the content of a file at the given path.
+export const readFileContent = (filePath) => {
   try {
     const content = fs.readFileSync(filePath, "utf-8");
     return content;
@@ -79,9 +87,10 @@ export function readFileContent(filePath) {
     console.error("Failed to read file:", error);
     return null;
   }
-}
+};
 
-export function readFolderContent(folderPath) {
+// Returns a list of file names in the specified folder. Throws an error if the folder is empty.
+export const readFolderContent = (folderPath) => {
   try {
     const fileNames = fs.readdirSync(folderPath);
     if (fileNames.length === 0) {
@@ -92,12 +101,13 @@ export function readFolderContent(folderPath) {
     console.error("Failed to read directory:", error);
     return [];
   }
-}
+};
 
-export function deleteFile(filePath) {
+// Deletes the file at the specified path.
+export const deleteFile = (filePath) => {
   try {
     fs.unlinkSync(filePath);
   } catch (error) {
     console.error("Failed to delete file:", error);
   }
-}
+};

@@ -1,18 +1,30 @@
 {
-  "name": "cli-first",
+  "name": "codebarn",
   "version": "1.0.0",
-  "main": "cli.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "description": "A CLI tool for managing code snippets",
+  "bin": {
+    "codebarn": "./bin/cli.mjs",
+    "cb": "./bin/cli.mjs"
   },
   "type": "module",
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": "",
+  "main": "bin/cli.mjs",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "postinstall": "node ./src/scripts/postinstall.mjs"
+  },
+  "keywords": [
+    "cli",
+    "snippets",
+    "codebarn"
+  ],
+  "author": "wlhmkhl",
+  "license": "MIT",
   "dependencies": {
+    "chalk": "^5.4.1",
     "commander": "^13.1.0",
+    "figlet": "^1.8.1",
     "inquirer": "^12.6.1",
-    "lowdb": "^7.0.1"
+    "lowdb": "^7.0.1",
+    "ora": "^8.2.0"
   }
 }

@@ -1,8 +1,8 @@
 import { JSONFilePreset } from "lowdb/node";
 
-// Skapa eller läs db.json med standarddata
+// Create or read db.json with default data
 const defaultData = { snippets: [] };
 const db = await JSONFilePreset("db.json", defaultData);
 
-// Exportera databasen
+// Export the database
 export default db;
