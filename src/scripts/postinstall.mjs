@@ -1,3 +1,4 @@
+//C:\Users\Wilkohl\Desktop\vs code\Projekt\codebarn\src\scripts\postinstall.mjs
 import figlet from "figlet";
 import chalk from "chalk";
 

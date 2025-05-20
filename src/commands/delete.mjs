@@ -1,7 +1,7 @@
 import ora from "ora";
 import chalk from "chalk";
 
-import { deleteAllPosts, deletePostByid } from "../utils/utils.mjs";
+import { deleteAllPosts, deletePostById } from "../utils/utils.mjs";
 
 // Deletes all snippets from the database.
 export const deleteAll = async () => {

@@ -1,12 +1,14 @@
 #!/usr/bin/env node
 
 import { Command } from "commander";
+import chalk from "chalk";
+
 import createFolder from "../src/commands/create-folder.mjs";
 import { copyFiles } from "../src/commands/copy-files-to-database.mjs";
 import showList from "../src/commands/show-codebarn.mjs";
 import { fetchAll, fetchById } from "../src/commands/fetch.mjs";
 import { deleteAll, deleteById } from "../src/commands/delete.mjs";
-import chalk from "chalk";
+import cleanup from "../src/commands/clean-up.mjs";
 
 // Handle Ctrl+C (SIGINT) gracefully and unexpected errors globally
 process.on("SIGINT", () => {
@@ -71,5 +73,10 @@ program
       fetchById(target);
     }
   });
+
+program
+  .command("cleanup")
+  .description("Remove all folders and data created by the CLI")
+  .action(cleanup);
 
 program.parse();
